@@ -1,0 +1,380 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://assets/icons/o.png" type="Texture" id=2]
+[ext_resource path="res://assets/icons/down.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/up.png" type="Texture" id=4]
+[ext_resource path="res://MainGUI.tres" type="Theme" id=5]
+[ext_resource path="res://Main.gd" type="Script" id=6]
+[ext_resource path="res://assets/icons/at1.png" type="Texture" id=7]
+[ext_resource path="res://assets/icons/undo1.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/pencil1.png" type="Texture" id=9]
+[ext_resource path="res://assets/icons/pencil2.png" type="Texture" id=10]
+[ext_resource path="res://assets/icons/eraser2.png" type="Texture" id=11]
+[ext_resource path="res://assets/icons/at2.png" type="Texture" id=12]
+[ext_resource path="res://assets/icons/send_message1.png" type="Texture" id=13]
+[ext_resource path="res://assets/icons/send_message2.png" type="Texture" id=14]
+[ext_resource path="res://assets/icons/undo2.png" type="Texture" id=15]
+[ext_resource path="res://assets/icons/eraser1.png" type="Texture" id=16]
+[ext_resource path="res://assets/icons/redo1.png" type="Texture" id=17]
+[ext_resource path="res://assets/icons/cursor2.png" type="Texture" id=18]
+[ext_resource path="res://assets/icons/redo2.png" type="Texture" id=19]
+[ext_resource path="res://assets/icons/cursor1.png" type="Texture" id=20]
+[ext_resource path="res://DrawingBox.gd" type="Script" id=23]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.368627, 0.627451, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 2.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
+border_width_left = 19
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.368627, 0.627451, 1, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.368627, 0.627451, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.67451, 0.882353, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0.447059, 0.788235, 1 )
+border_width_left = 3
+border_width_right = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 11, 11 )
+
+[sub_resource type="Theme" id=8]
+ScrollContainer/styles/bg = null
+VScrollBar/icons/decrement = ExtResource( 3 )
+VScrollBar/icons/decrement_highlight = ExtResource( 3 )
+VScrollBar/icons/increment = ExtResource( 4 )
+VScrollBar/icons/increment_highlight = ExtResource( 4 )
+VScrollBar/styles/grabber = SubResource( 4 )
+VScrollBar/styles/grabber_highlight = SubResource( 5 )
+VScrollBar/styles/grabber_pressed = SubResource( 5 )
+VScrollBar/styles/scroll = SubResource( 6 )
+VScrollBar/styles/scroll_focus = null
+VSlider/icons/grabber = ExtResource( 3 )
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = ExtResource( 3 )
+VSlider/styles/grabber_area = SubResource( 7 )
+VSlider/styles/grabber_area_highlight = null
+VSlider/styles/slider = SubResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.368627, 0.627451, 1, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="ViewportTexture" id=10]
+viewport_path = NodePath("Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer/Viewport")
+
+[node name="Node" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleContainer" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer/TitleContainer"]
+margin_right = 480.0
+margin_bottom = 14.0
+
+[node name="MenuButton" type="MenuButton" parent="Control/PanelContainer/VBoxContainer/TitleContainer/HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 14.0
+text = "File"
+
+[node name="PopupMenu2" type="PopupMenu" parent="Control/PanelContainer/VBoxContainer/TitleContainer/HBoxContainer/MenuButton"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Button" type="Button" parent="Control/PanelContainer/VBoxContainer/TitleContainer/HBoxContainer/MenuButton/PopupMenu2"]
+margin_right = 12.0
+margin_bottom = 14.0
+text = "hey stinker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton2" type="MenuButton" parent="Control/PanelContainer/VBoxContainer/TitleContainer/HBoxContainer"]
+margin_left = 30.0
+margin_right = 82.0
+margin_bottom = 14.0
+focus_mode = 2
+text = "Container"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 480.0
+margin_bottom = 270.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sidebar" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_bottom = 252.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer"]
+margin_left = 4.0
+margin_right = 480.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 3
+custom_constants/margin_bottom = 3
+
+[node name="Main" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+margin_right = 473.0
+margin_bottom = 249.0
+size_flags_horizontal = 3
+
+[node name="MessageLogMargin" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main"]
+margin_right = 473.0
+margin_bottom = 163.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin"]
+margin_left = 2.0
+margin_top = 4.0
+margin_right = 469.0
+margin_bottom = 159.0
+custom_constants/separation = 8
+
+[node name="Buttons" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin/HBoxContainer"]
+margin_right = 11.0
+margin_bottom = 155.0
+alignment = 2
+
+[node name="TextureButton" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin/HBoxContainer/Buttons"]
+margin_top = 144.0
+margin_right = 11.0
+margin_bottom = 155.0
+texture_normal = ExtResource( 2 )
+
+[node name="MessageLogScroll" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin/HBoxContainer"]
+margin_left = 19.0
+margin_right = 467.0
+margin_bottom = 155.0
+rect_pivot_offset = Vector2( 299.853, 48.9485 )
+size_flags_horizontal = 3
+theme = SubResource( 8 )
+scroll_horizontal_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin/HBoxContainer/MessageLogScroll"]
+margin_right = 448.0
+margin_bottom = 2.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+
+[node name="MessageLog" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/MessageLogMargin/HBoxContainer/MessageLogScroll/MarginContainer"]
+margin_top = 2.0
+margin_right = 446.0
+margin_bottom = 2.0
+size_flags_horizontal = 3
+
+[node name="ComposerMargin" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main"]
+margin_top = 167.0
+margin_right = 473.0
+margin_bottom = 249.0
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="MessageComposer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin"]
+margin_left = 2.0
+margin_top = 4.0
+margin_right = 469.0
+margin_bottom = 78.0
+size_flags_vertical = 3
+
+[node name="MessageTools" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer"]
+margin_right = 14.0
+margin_bottom = 74.0
+
+[node name="Undo" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+visible = false
+margin_right = 14.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 15 )
+
+[node name="Redo" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+visible = false
+margin_right = 14.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 19 )
+
+[node name="Pencil" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+margin_right = 14.0
+margin_bottom = 14.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+
+[node name="Eraser" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+margin_top = 18.0
+margin_right = 14.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 11 )
+
+[node name="Type" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+visible = false
+margin_top = 36.0
+margin_right = 14.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 18 )
+
+[node name="ChangeUsername" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools"]
+visible = false
+margin_top = 36.0
+margin_right = 14.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 12 )
+
+[node name="MessageComposer" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer"]
+margin_left = 18.0
+margin_right = 467.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer"]
+margin_right = 413.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 9 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 411.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+stretch = true
+script = ExtResource( 23 )
+
+[node name="Viewport" type="Viewport" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer"]
+size = Vector2( 409, 70 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+usage = 0
+render_target_clear_mode = 2
+render_target_update_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer/Viewport"]
+visible = false
+margin_left = 26.0
+margin_top = 161.0
+margin_right = 66.0
+margin_bottom = 201.0
+
+[node name="Sprite" type="Sprite" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer/Viewport"]
+visible = false
+texture = SubResource( 10 )
+
+[node name="Timer" type="Timer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer/Viewport"]
+wait_time = 0.001
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer"]
+margin_left = 417.0
+margin_right = 449.0
+margin_bottom = 74.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SendMessage" type="TextureButton" parent="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 32.0
+margin_bottom = 74.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools/Pencil" to="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" method="switch_tool" binds= [ 1 ]]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools/Eraser" to="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" method="switch_tool" binds= [ 0 ]]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageTools/Type" to="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" method="switch_tool" binds= [ 2 ]]
+[connection signal="mouse_entered" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" to="Control" method="_on_ViewportContainer_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" to="Control" method="_on_ViewportContainer_mouse_exited"]
+[connection signal="timeout" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer/Viewport/Timer" to="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" method="_on_Timer_timeout"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/VBoxContainer/SendMessage" to="Control/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/Main/ComposerMargin/MessageComposer/MessageComposer/PanelContainer/ViewportContainer" method="_on_SendMessage_pressed"]
